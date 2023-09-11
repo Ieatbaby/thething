@@ -1,0 +1,43 @@
+#define AOUT_PIN A0
+int Moistval;
+const int In1 = 10;
+
+const int In2 = 11;
+
+
+void setup() {
+Serial.begin(9600);
+ pinMode(In1, OUTPUT);
+ pinMode(In2, OUTPUT);
+
+}
+
+void loop() {
+int MVal = analogRead(AOUT_PIN);
+Moistval = map(MVal, 0, 1023, 0, 100);
+Serial.print (Moistval);
+Serial.println ("%");
+
+  if (Moistval < 10)
+    {
+  motor();
+   
+  }
+
+  else {
+  digitalWrite(In1, LOW);
+digitalWrite(In2,LOW);
+  }
+}
+
+
+void motor(){
+digitalWrite(In1, HIGH);
+digitalWrite(In2,LOW);
+
+delay(10);
+digitalWrite(In1, LOW);
+digitalWrite(In2,LOW);
+
+
+}
